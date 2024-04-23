@@ -10,6 +10,11 @@ public class AutoFall : MonoBehaviour
 
     void Update()
     {
+        if (GameState.GetCurrentState() == GameState.State.GameOver)
+        {
+            return;
+        }
+
         if (Time.time - _lastFallTime >= GameSettings.instance.fallSpeed)
         {
             Vector3 newPosition = transform.position + new Vector3(0, -1, 0);

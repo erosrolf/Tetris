@@ -1,8 +1,37 @@
-using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class TetrominoMovement : MonoBehaviour
 {
+    public void MoveLeft()
+    {
+        Debug.Log("left");
+        Vector3 oldPosition = transform.position;
+        transform.position += new Vector3(-1, 0, 0);
+        if (IsInsideField() == false)
+        {
+            transform.position = oldPosition;
+        }
+    }
+
+    public void MoveRight()
+    {
+        Debug.Log("right");
+        Vector3 oldPosition = transform.position;
+        transform.position += new Vector3(1, 0, 0);
+        if (IsInsideField() == false)
+        {
+            transform.position = oldPosition;
+        }
+    }
+
+    public void Rotate()
+    {
+        transform.eulerAngles += new Vector3(0, 0, 90);
+    }
+
     private bool CheckCollision()
     {
         CompositeCollider2D compositeCollider = GetComponent<CompositeCollider2D>();
@@ -21,24 +50,23 @@ public class TetrominoMovement : MonoBehaviour
     private bool IsInsideField()
     {
         Transform[] blocks = GetComponentsInChildren<Transform>();
+        Vector3 fieldPosition = FieldController.Position;
+        float fieldWidth = FieldController.Width;
+        float fieldHeight = FieldController.Height;
 
         foreach (Transform block in blocks)
         {
-            // Если этот Transform - это сама фигура, пропускаем его
             if (block == transform) continue;
-
             Vector3 position = block.position;
 
-            // Проверяем, находится ли блок внутри границ игрового поля
-            if (position.x < FieldController.Position.x ||
-                position.x > FieldController.Position.x + FieldController.Width ||
-                position.y < FieldController.Position.y ||
-                position.y > FieldController.Position.y + FieldController.Height)
+            if (position.x < fieldPosition.x - fieldWidth / 2 ||
+                position.x > fieldPosition.x + fieldWidth / 2 ||
+                position.y < fieldPosition.y - fieldHeight / 2 ||
+                position.y > fieldPosition.y + fieldHeight / 2)
             {
                 return false;
             }
         }
-
         return true;
     }
 }

@@ -16,20 +16,26 @@ public class FieldController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            PrintFieldMatrix();
+            PrintFieldMatrix(0);
         }
     }
 
-    public static void PrintFieldMatrix()
+    void LateUpdate()
+    {
+        if (IsAnyColFull())
+        {
+            GameState.GameOver();
+        }
+    }
+
+    public static void PrintFieldMatrix(int row)
     {
         string line = "\n";
         for (int x = 0; x < Width; x++)
         {
-            // Добавляем к строке 1, если в этой ячейке есть блок, и 0 в противном случае
-            line += _fieldMatrix[x, 0] ? "1" : "0";
+            line += _fieldMatrix[x, row] ? "1" : "0";
             line += " ";
         }
-        // Выводим строку в консоль
         Debug.Log(line);
     }
 
@@ -51,11 +57,35 @@ public class FieldController : MonoBehaviour
         _fieldMatrix[x, y] = true;
     }
 
-    bool IsLineFull(int y)
+    private bool IsRowFull(int row)
     {
-        for (int x = 0; x < Width; x++)
+        for (int col = 0; col < Width; col++)
         {
-            if (!_fieldMatrix[x, y])
+            if (!_fieldMatrix[col, row])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private bool IsAnyColFull()
+    {
+        for (int col = 0; col < Width; col++)
+        {
+            if (IsColFull(col))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool IsColFull(int col)
+    {
+        for (int row = 0; row < Height; row++)
+        {
+            if (!_fieldMatrix[col, row])
             {
                 return false;
             }

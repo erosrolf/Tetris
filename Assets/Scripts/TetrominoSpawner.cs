@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class TetrominoSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _tetrominoPrefabs;
     [SerializeField] private List<Color> _colors;
+    [SerializeField] public PlayerController playerController;
 
     void Start()
     {
@@ -15,13 +17,11 @@ public class TetrominoSpawner : MonoBehaviour
 
     void OnEnable()
     {
-        // Подписываемся на событие
         AutoFall.OnTetrominoFallen += SpawnTetromino;
     }
 
     void OnDisable()
     {
-        // Отписываемся от события
         AutoFall.OnTetrominoFallen -= SpawnTetromino;
     }
 
@@ -37,6 +37,6 @@ public class TetrominoSpawner : MonoBehaviour
         {
             spriteRenderer.color = randomColor;
         }
+        playerController.SetCurrentTetromino(newTetromino.GetComponent<TetrominoMovement>());
     }
-
 }

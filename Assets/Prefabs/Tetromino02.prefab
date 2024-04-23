@@ -399,11 +399,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6600639244420725109}
+  - component: {fileID: 4803180864382387333}
   - component: {fileID: 1868011144659929232}
   - component: {fileID: 7392386732724161569}
   - component: {fileID: 5720637898337999438}
   m_Layer: 0
-  m_Name: Figure_05
+  m_Name: Tetromino02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,6 +429,18 @@ Transform:
   - {fileID: 1636150109658606691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4803180864382387333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6770473609666897293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e50c71f70814994ebae1891b0e6655a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1868011144659929232
 MonoBehaviour:
   m_ObjectHideFlags: 0
