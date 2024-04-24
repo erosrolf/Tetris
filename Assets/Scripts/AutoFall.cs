@@ -32,7 +32,7 @@ public class AutoFall : MonoBehaviour
                     }
                 }
                 OnTetrominoFallen?.Invoke();
-                Destroy(this);
+                Destroy(gameObject);
             }
             _lastFallTime = Time.time;
         }

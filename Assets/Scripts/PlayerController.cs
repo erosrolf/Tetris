@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             _oldSpeed = GameSettings.instance.fallSpeed;
-            GameSettings.instance.fallSpeed = 0.15f;
+            GameSettings.instance.fallSpeed = 0.1f;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {

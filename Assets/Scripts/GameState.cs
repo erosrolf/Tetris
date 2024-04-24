@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    private static int _score = 0;
     public enum State { Playing, GameOver, Paused }
     private static State _currentState = State.Playing;
+
+    public static void AddScore(int score)
+    {
+        _score += score;
+    }
 
     public static void GameOver()
     {
