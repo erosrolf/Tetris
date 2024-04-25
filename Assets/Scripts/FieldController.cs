@@ -3,6 +3,8 @@ using UnityEngine;
 public class FieldController : MonoBehaviour
 {
     [SerializeField] private GameObject _placedBlocks;
+    [SerializeField] private ScoreManager _scoreManager;
+
     private static bool[,] _fieldMatrix;
 
     public static float Width { get; private set; }
@@ -32,7 +34,7 @@ public class FieldController : MonoBehaviour
     {
         if (IsAnyColFull())
         {
-            GameState.GameOver();
+            GameManager.GameOver();
         }
     }
 
@@ -43,7 +45,7 @@ public class FieldController : MonoBehaviour
             DeleteBlocksOnFullLine(rowForDelete);
             ShiftBlocksAfterRemoveRow(rowForDelete);
             DeleteAndShiftRowIntoMatrix(rowForDelete);
-            GameState.AddScore(Mathf.FloorToInt(Width));
+            _scoreManager.AddScore(_fieldMatrix.GetLength(0));
         }
     }
 
@@ -53,43 +55,43 @@ public class FieldController : MonoBehaviour
         foreach (var block in blocks)
         {
             if (block == _placedBlocks.transform)
-            {
                 continue;
-            }
+
             int y = Mathf.FloorToInt(block.position.y + Height / 2);
             if (y == deletedRow)
-            {
                 Destroy(block.gameObject);
-            }
         }
     }
 
     private void ShiftBlocksAfterRemoveRow(int deletedRow)
     {
+        int height = Mathf.FloorToInt(Height);
+        for (int i = 1; i < height - deletedRow; i++)
+        {
+            ShiftBlocksAtRow(deletedRow + i);
+        }
+    }
+
+    private void ShiftBlocksAtRow(int row)
+    {
         Transform[] blocks = _placedBlocks.GetComponentsInChildren<Transform>();
         foreach (var block in blocks)
         {
             if (block == _placedBlocks.transform)
-            {
                 continue;
-            }
+
             int y = Mathf.FloorToInt(block.position.y + Height / 2);
-            if (y > deletedRow)
-            {
+            if (y == row)
                 block.Translate(new Vector3(0, -1, 0));
-            }
         }
     }
+
 
     private void DeleteAndShiftRowIntoMatrix(int deletedRow)
     {
         for (int i = 0; i < _fieldMatrix.GetLength(0); ++i)
-        {
             for (int j = deletedRow; j < _fieldMatrix.GetLength(1) - 1; ++j)
-            {
                 _fieldMatrix[i, j] = _fieldMatrix[i, j + 1];
-            }
-        }
     }
 
     public static void AddBlockToMatrix(Transform block)

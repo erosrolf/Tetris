@@ -10,7 +10,7 @@ public class AutoFall : MonoBehaviour
 
     void Update()
     {
-        if (GameState.GetCurrentState() == GameState.State.GameOver)
+        if (GameManager.GetCurrentState() != GameManager.State.Playing)
         {
             return;
         }
