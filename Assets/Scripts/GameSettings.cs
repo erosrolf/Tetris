@@ -1,16 +1,20 @@
+using TMPro;
 using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
-    // Скорость падения тетромино
-    [SerializeField] public float fallSpeed = 0;
+    [SerializeField] private float _fallSpeed = 0;
     [SerializeField] public GameObject field = null;
+    [SerializeField] public TextMeshProUGUI speedLabel;
+    [SerializeField] public bool autoAcceleration;
+    [SerializeField] public int scoreForAcceleration;
 
     // Сделаем этот класс синглтоном, чтобы мы могли легко получить доступ к нему из других скриптов
     public static GameSettings instance;
 
     void Awake()
     {
+        speedLabel.text = _fallSpeed.ToString();
         // Если уже есть другой экземпляр этого класса, уничтожим этот объект
         if (instance != null && instance != this)
         {
@@ -24,4 +28,30 @@ public class GameSettings : MonoBehaviour
         // Убеждаемся, что этот объект не будет уничтожен при загрузке новой сцены
         DontDestroyOnLoad(gameObject);
     }
+
+    public static float GetSpeed()
+    {
+        return instance._fallSpeed;
+    }
+
+    public void SpeedIncrease()
+    {
+        Debug.Log("speed = " + _fallSpeed);
+        if (_fallSpeed < 10)
+        {
+            Debug.Log("speed++");
+            ++_fallSpeed;
+            speedLabel.text = _fallSpeed.ToString();
+        }
+    }
+
+    public void SpeedDecrease()
+    {
+        if (_fallSpeed > 1)
+        {
+            --_fallSpeed;
+            speedLabel.text = _fallSpeed.ToString();
+        }
+    }
 }
+

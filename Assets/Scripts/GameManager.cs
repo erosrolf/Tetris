@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         if (_currentState == State.Playing)
         {
             _currentState = State.GameOver;
+            _instance.SetActiveGroup(_instance._playingObjects, false);
             _instance.SetActiveGroup(_instance._gameOverObjects, true);
         }
     }

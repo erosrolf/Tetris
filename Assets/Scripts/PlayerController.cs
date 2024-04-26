@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private TetrominoMovement _currentTetromino;
-    private float _oldSpeed;
+    private float _timer;
+    private float _delay = 0.05f;
 
     public void SetCurrentTetromino(TetrominoMovement newTetromino)
     {
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        _timer += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             _currentTetromino.MoveLeft();
@@ -24,14 +27,14 @@ public class PlayerController : MonoBehaviour
         {
             _currentTetromino.Rotate();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
-            _oldSpeed = GameSettings.instance.fallSpeed;
-            GameSettings.instance.fallSpeed = 0.1f;
+            _currentTetromino.FallDown();
         }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow) && _timer > _delay)
         {
-            GameSettings.instance.fallSpeed = _oldSpeed;
+            _currentTetromino.MoveDown();
+            _timer = 0;
         }
     }
 }

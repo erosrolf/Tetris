@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 869540595833547618}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: -1, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -287,7 +287,7 @@ Transform:
   m_GameObject: {fileID: 3191441436423008332}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 236940289865695218}
   - component: {fileID: 7262602796039872721}
   m_Layer: 0
-  m_Name: Tetromino01
+  m_Name: Tetromino05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canRotate: 1
-  fullRotate: 1
+  fullRotate: 0
 --- !u!114 &-909103465902530816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,14 +521,14 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 8672422539654718747}
     m_ColliderPaths:
-    - - X: 5000000
+    - - X: -5000000
+        Y: -5000000
+      - X: -15000000
+        Y: -5000000
+      - X: -15000000
         Y: -15000000
       - X: -5000000
         Y: -15000000
-      - X: -5000000
-        Y: -25000000
-      - X: 5000000
-        Y: -25000000
   - m_Collider: {fileID: 1002332513476819831}
     m_ColliderPaths:
     - - X: 5000000
@@ -551,20 +551,24 @@ CompositeCollider2D:
         Y: 5000000
   - m_Collider: {fileID: 2255538277044843186}
     m_ColliderPaths:
-    - - X: 5000000
+    - - X: -5000000
+        Y: 5000000
+      - X: -15000000
+        Y: 5000000
+      - X: -15000000
         Y: -5000000
       - X: -5000000
         Y: -5000000
-      - X: -5000000
-        Y: -15000000
-      - X: 5000000
-        Y: -15000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 0.4999707, y: -2.5}
+    - - {x: -0.5000293, y: -1.5}
+      - {x: -0.49997061, y: -0.5}
+      - {x: 0.5, y: -0.4999707}
       - {x: 0.4999707, y: 1.5}
       - {x: -0.5, y: 1.4999707}
-      - {x: -0.4999707, y: -2.5}
+      - {x: -0.5000294, y: 0.5}
+      - {x: -1.5, y: 0.4999707}
+      - {x: -1.4999707, y: -1.5}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0

@@ -15,7 +15,8 @@ public class AutoFall : MonoBehaviour
             return;
         }
 
-        if (Time.time - _lastFallTime >= GameSettings.instance.fallSpeed)
+        float speed = 1.1f - (GameSettings.GetSpeed() / 10);
+        if (Time.time - _lastFallTime >= speed)
         {
             Vector3 newPosition = transform.position + new Vector3(0, -1, 0);
             Vector3 oldPosition = transform.position;
@@ -23,19 +24,25 @@ public class AutoFall : MonoBehaviour
             if (IsAtBottom())
             {
                 transform.position = oldPosition;
-                foreach (Transform block in GetComponentsInChildren<Transform>())
-                {
-                    if (block != transform)
-                    {
-                        FieldController.AddBlockToMatrix(block);
-                        block.parent = FieldController.PlacedBlocks.transform;
-                    }
-                }
-                OnTetrominoFallen?.Invoke();
-                Destroy(gameObject);
+                PlaceFigure();
             }
             _lastFallTime = Time.time;
         }
+    }
+
+    public void PlaceFigure()
+    {
+        foreach (Transform block in GetComponentsInChildren<Transform>())
+        {
+            if (block != transform)
+            {
+                FieldController.AddBlockToMatrix(block);
+                block.parent = FieldController.PlacedBlocks.transform;
+            }
+        }
+        OnTetrominoFallen?.Invoke();
+        Destroy(gameObject);
+
     }
 
     private bool IsAtBottom()
