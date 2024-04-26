@@ -8,6 +8,7 @@ public class GameSettings : MonoBehaviour
     [SerializeField] public TextMeshProUGUI speedLabel;
     [SerializeField] public bool autoAcceleration;
     [SerializeField] public int scoreForAcceleration;
+    [SerializeField] private int _maxSpeed;
 
     // Сделаем этот класс синглтоном, чтобы мы могли легко получить доступ к нему из других скриптов
     public static GameSettings instance;
@@ -37,7 +38,7 @@ public class GameSettings : MonoBehaviour
     public void SpeedIncrease()
     {
         Debug.Log("speed = " + _fallSpeed);
-        if (_fallSpeed < 10)
+        if (_fallSpeed < _maxSpeed)
         {
             Debug.Log("speed++");
             ++_fallSpeed;

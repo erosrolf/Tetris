@@ -293,6 +293,7 @@ MonoBehaviour:
   speedLabel: {fileID: 1370030527}
   autoAcceleration: 1
   scoreForAcceleration: 10
+  _maxSpeed: 10
 --- !u!4 &134523196
 Transform:
   m_ObjectHideFlags: 0

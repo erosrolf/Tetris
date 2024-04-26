@@ -18,10 +18,13 @@ public class ScoreManager : MonoBehaviour
         if (GameSettings.instance.autoAcceleration)
         {
             if (_score / GameSettings.instance.scoreForAcceleration <
-                GameSettings.GetSpeed())
+                GameSettings.GetSpeed() && _score < 1000)
             {
                 Debug.Log("into score manager fallspeed" + GameSettings.GetSpeed());
-                GameSettings.instance.SpeedIncrease();
+            }
+            else if (_score > 1000)
+            {
+                Debug.Log("into score manager fallspeed" + GameSettings.GetSpeed());
             }
         }
         _score += amount;
