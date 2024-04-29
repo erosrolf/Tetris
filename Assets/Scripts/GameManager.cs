@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,8 +36,21 @@ public class GameManager : MonoBehaviour
         if (_currentState == State.Menu || _currentState == State.Paused)
         {
             _currentState = State.Playing;
-            _instance.SetActiveGroup(_instance._playingObjects, true);
             _instance.SetActiveGroup(_instance._menuObjects, false);
+            _instance.SetActiveGroup(_instance._gameOverObjects, false);
+            _instance.SetActiveGroup(_instance._playingObjects, true);
+        }
+    }
+
+    public static void NewGame()
+    {
+        if (_currentState == State.GameOver)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // _currentState = State.Playing;
+            // _instance.SetActiveGroup(_instance._menuObjects, false);
+            // _instance.SetActiveGroup(_instance._gameOverObjects, false);
+            // _instance.SetActiveGroup(_instance._gameOverObjects, true);
         }
     }
 

@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private int _score;
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _gameOverScoreText;
 
     void Start()
     {
@@ -21,13 +22,15 @@ public class ScoreManager : MonoBehaviour
                 GameSettings.GetSpeed() && _score < 1000)
             {
                 Debug.Log("into score manager fallspeed" + GameSettings.GetSpeed());
+                GameSettings.instance.SpeedIncrease();
             }
             else if (_score > 1000)
             {
                 Debug.Log("into score manager fallspeed" + GameSettings.GetSpeed());
+                GameSettings.instance.SpeedIncrease();
             }
         }
         _score += amount;
-        _scoreText.text = _score.ToString();
+        _gameOverScoreText.text = _scoreText.text = _score.ToString();
     }
 }

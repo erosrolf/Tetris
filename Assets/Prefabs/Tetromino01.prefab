@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canRotate: 1
-  fullRotate: 1
+  fullRotate: 0
 --- !u!114 &-909103465902530816
 MonoBehaviour:
   m_ObjectHideFlags: 0
