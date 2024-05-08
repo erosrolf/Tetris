@@ -23,11 +23,18 @@ public class FieldController : MonoBehaviour
                                 Mathf.RoundToInt(Height)];
         PlacedBlocks = _placedBlocks;
         AutoFall.OnTetrominoFallen += DeleteFullRow;
+        AutoFall.OnTetrominoFallen += TetrominaFallenSound;
     }
 
     void OnDestroy()
     {
         AutoFall.OnTetrominoFallen -= DeleteFullRow;
+        AutoFall.OnTetrominoFallen -= TetrominaFallenSound;
+    }
+
+    private void TetrominaFallenSound()
+    {
+        AudioManager.Instance.PlaySFX("Fallen", GetComponent<AudioSource>());
     }
 
     private void DeleteFullRow()
@@ -38,6 +45,7 @@ public class FieldController : MonoBehaviour
             DeleteBlocksOnFullLine(rowForDelete);
             ShiftBlocksAfterRemoveRow(rowForDelete);
             _scoreManager.AddScore(_fieldMatrix.GetLength(0));
+            AudioManager.Instance.PlaySFX("DeleteRow");
         }
     }
 

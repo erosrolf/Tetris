@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
-    [SerializeField] private float _fallSpeed = 0;
+    [SerializeField] private float _fallSpeed;
     [SerializeField] public GameObject field = null;
     [SerializeField] public TextMeshProUGUI speedLabel;
     [SerializeField] public bool autoAcceleration;
@@ -15,18 +15,13 @@ public class GameSettings : MonoBehaviour
 
     void Awake()
     {
-        speedLabel.text = _fallSpeed.ToString();
-        // Если уже есть другой экземпляр этого класса, уничтожим этот объект
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        // Если это первый экземпляр этого класса, сохраняем ссылку на него
         instance = this;
-
-        // Убеждаемся, что этот объект не будет уничтожен при загрузке новой сцены
         DontDestroyOnLoad(gameObject);
     }
 
@@ -52,6 +47,13 @@ public class GameSettings : MonoBehaviour
         {
             --_fallSpeed;
             speedLabel.text = _fallSpeed.ToString();
+        }
+    }
+    public void SetSpeed(int speed)
+    {
+        if (speed >= 1 && speed <= _maxSpeed)
+        {
+            _fallSpeed = speed;
         }
     }
 }

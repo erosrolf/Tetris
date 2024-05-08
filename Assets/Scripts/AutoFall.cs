@@ -42,7 +42,6 @@ public class AutoFall : MonoBehaviour
         }
         OnTetrominoFallen?.Invoke();
         Destroy(gameObject);
-
     }
 
     private bool IsAtBottom()
